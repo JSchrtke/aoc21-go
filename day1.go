@@ -2006,11 +2006,14 @@ var input = []int{
 }
 
 func runDayOne() {
-    increase_count := 0
-    for i := 1; i < len(input); i++ {
-        if input[i] > input[i-1] {
-            increase_count += 1
-        }
-    }
-    fmt.Println(fmt.Sprintf("depth increased %d times", increase_count))
+	increase_count := 0
+	previous_sum := input[0] + input[1] + input[2]
+	for i := 3; i < len(input); i++ {
+		sum := input[i-2] + input[i-1] + input[i]
+		if sum > previous_sum {
+			increase_count += 1
+		}
+		previous_sum = sum
+	}
+	fmt.Println(fmt.Sprintf("depth increased %d times", increase_count))
 }
